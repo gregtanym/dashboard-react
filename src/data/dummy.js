@@ -43,6 +43,7 @@ export const gridOrderStatus = (props) => (
   </button>
 );
 
+// mapping the field to the keyfields in the kanbanData
 export const kanbanGrid = [
   { headerText: 'To Do',
     keyField: 'Open',
