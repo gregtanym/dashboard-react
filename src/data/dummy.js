@@ -3210,8 +3210,8 @@ export const stackedPrimaryXAxis = {
 
 export const stackedPrimaryYAxis = {
   lineStyle: { width: 0 },
-  minimum: 100,
-  maximum: 400,
+  minimum: 0,
+  maximum: 500,
   interval: 100,
   majorTickLines: { width: 0 },
   majorGridLines: { width: 1 },
