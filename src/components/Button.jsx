@@ -1,12 +1,15 @@
 import React from 'react'
+import { useStateContext } from '../contexts/ContextProvider'
 
-const Button = ({bgcolor, color, size, text, borderRadius}) => {
+const Button = ({bgColor, color, size, text, borderRadius}) => {
+  const { handleClose } = useStateContext()
   return (
     <button 
       type='button'
       // if name of field is same as name of css property then can just pass the variable name into the object
-      style={{ backgroundColor: bgcolor, color, borderRadius}}
+      style={{ backgroundColor: bgColor, color, borderRadius}}
       className={`text-${size} p-3 hover:drop-shadow-xl`}
+      onClick={handleClose}
     >
       {text}
     </button>

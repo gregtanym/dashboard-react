@@ -21,7 +21,7 @@ const NavButton = ({title, customFunc, icon, color, dotColor}) => (
 )
 
 const Navbar = () => {
-  const { activeMenu, setActiveMenu, isClicked, setIsClicked, handleClick, screenSize, setScreenSize } = useStateContext()
+  const { activeMenu, setActiveMenu, isClicked, setIsClicked, handleClick, screenSize, setScreenSize, currentColor, currentMode } = useStateContext()
 
   useEffect(() => {
     // function that sets the screenSize state with current window width
@@ -51,36 +51,36 @@ const Navbar = () => {
     <div className='flex justify-between p-2 md:mx-6 relative'>
       <NavButton title='Menu'
         customFunc={() => setActiveMenu((prevActiveMenu) => !prevActiveMenu)}
-        color='blue'
+        color= {currentColor}
         icon={<AiOutlineMenu/>}
       />
       <div className="flex">
         <NavButton 
           title='Cart'
           customFunc={() => handleClick('cart')}
-          color='blue'
+          color={currentColor}
           icon={<FiShoppingCart/>}
         />
         <NavButton 
           title='Chat'
           dotColor='#03C9D7'
           customFunc={() => handleClick('chat')}
-          color='blue'
+          color={currentColor}
           icon={<BsChatLeft/>}
         />
         <NavButton 
           title='Notifications'
           dotColor='#03C9D7'
           customFunc={() => handleClick('notification')}
-          color='blue'
+          color={currentColor}
           icon={<RiNotification3Line/>}
         />
         <TooltipComponent content='Profile' position='BottomCenter'>
-          <div className="flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg" onClick={() => handleClick('userProfile')}>
+          <div className="flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray dark:hover:bg-[#484B52] rounded-lg" onClick={() => handleClick('userProfile')}>
             <img className='rounded-full w-8 h-8' src={avatar}/>
             <p>
-              <span className='text-grey-400 text-14'>Hi, </span> {' '}
-              <span className='text-grey-400 font-bold ml-1 text-14'>Micheal</span>
+              <span className='text-grey-400 text-14' style={{color: currentMode === 'Dark' ? 'white' : 'rgb(153, 171, 180)'}}>Hi, </span> {' '}
+              <span className='text-grey-400 font-bold ml-1 text-14' style={{color: currentMode === 'Dark' ? 'white' : 'rgb(153, 171, 180)'}}>Micheal</span>
             </p>
             <MdKeyboardArrowDown className='text-grey-400 text-14'/>
           </div>

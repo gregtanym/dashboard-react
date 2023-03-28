@@ -10,9 +10,9 @@ import { useStateContext } from './contexts/ContextProvider'
 // and copy and paste unfamiliar classnames into tailwind website to see exactly what it does
 
 const App = () => {
-    const {activeMenu} = useStateContext()
+    const {activeMenu, themeSettings, setThemeSettings, currentColor, currentMode} = useStateContext()
   return (
-    <div>
+    <div className={currentMode === 'Dark' ? 'dark' : ''}>
         <BrowserRouter>
             <div className='flex relative dark:bg-main-dark-bg'>
                 <div className='fixed right-4 bottom-4' style={{ zIndex: '1000'}}>
@@ -23,8 +23,8 @@ const App = () => {
                         hover:bg-light-gray 
                         text-white' 
                         // we putting background color in style attribute so that we are able to change the color dynamically
-                        style={{backgroundColor: 'blue', borderRadius: '50%'}}>
-                            <FiSettings/>
+                        style={{backgroundColor: currentColor, borderRadius: '50%'}}>
+                            <FiSettings onClick={() => setThemeSettings(true)}/>
                         </button>
                     </TooltipComponent>
                 </div>
@@ -38,12 +38,16 @@ const App = () => {
                     </div>
                 )}
                 <div className={
-                    `dark:bg-main-bg bg-main-bg min-h-screen w-full ${activeMenu ? 'md:ml-72' : 'flex-2'}`
+                    `dark:bg-main-dark-bg bg-main-bg min-h-screen w-full 
+                    ${activeMenu 
+                        ? 'md:ml-72' 
+                        : 'flex-2'}`
                 }>
                     <div className='fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full'>
                         <Navbar />
                     </div>
                     <div>
+                        {themeSettings && <ThemeSettings/>}
                         <Routes>
                             <Route path='/' element={<Ecommerce/>}/>
                             <Route path='/ecommerce' element={<Ecommerce/>}/>
@@ -62,9 +66,9 @@ const App = () => {
                             <Route path='/bar' element={<Bar/>}/>
                             <Route path='/pie' element={<Pie/>}/>
                             <Route path='/financial' element={<Financial/>}/>
-                            <Route path='/color-picker' element={<ColorMapping/>}/>
+                            <Route path='/color-mapping' element={<ColorMapping/>}/>
                             <Route path='/pyramid' element={<Pyramid/>}/>
-                            <Route path='/stack' element={<Stacked/>}/>
+                            <Route path='/stacked' element={<Stacked/>}/>
                         </Routes>
                     </div>
                 </div>

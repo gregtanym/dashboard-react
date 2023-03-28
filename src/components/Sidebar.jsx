@@ -8,14 +8,14 @@ import {links} from '../data/dummy'
 import { useStateContext } from '../contexts/ContextProvider'
 
 const Sidebar = () => {
-  const {activeMenu, setActiveMenu, screenSize} = useStateContext();
+  const {activeMenu, setActiveMenu, screenSize, currentColor} = useStateContext();
   // checks if you are on a mobile device and closes the sidebar after u click on a link coz the sidebar takes up a lot of space
   const handleCloseSidebar = () => {
     if(activeMenu && screenSize <= 900) {
       setActiveMenu(false)
     }
   }
-  const activeLink = 'flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg  text-white  text-md m-2 bg-sky-600'
+  const activeLink = 'flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg  text-white  text-md m-2'
   const normalLink = 'flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-md text-gray-700 dark:text-gray-200 dark:hover:text-black hover:bg-light-gray m-2'
 
   return (
@@ -29,7 +29,7 @@ const Sidebar = () => {
             </Link>
             <TooltipComponent content='Menu' position='BottomCenter'>
               {/* <button type='button' onClick={()=>{}} className='text-xl rounded-full p-3 hover:bg-light-gray mt-4 block md:hidden'> */}
-              <button type='button' onClick={()=>{setActiveMenu(!activeMenu)}} className='text-xl rounded-full p-3 hover:bg-light-gray mt-4 block'>
+              <button type='button' onClick={()=>{setActiveMenu(!activeMenu)}} className='text-xl rounded-full p-3 hover:bg-light-gray mt-4 block dark:text-white dark:hover:bg-[#484B52]'>
                 <MdOutlineCancel/>
               </button>
             </TooltipComponent>
@@ -45,6 +45,9 @@ const Sidebar = () => {
                     to={`/${link.name}`}
                     key={link.name}
                     onClick={handleCloseSidebar}
+                    style={({isActive}) => ({
+                      backgroundColor: isActive ? currentColor : ''
+                    })}
                     // isActive is a state found in NavLink that returns true if the link is indeed the current route (whether it is active or not)
                     className={({ isActive }) => isActive ? activeLink : normalLink}
                   >
